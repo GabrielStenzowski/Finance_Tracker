@@ -1,6 +1,7 @@
+'use client'
 import { Card, CardContent } from '@/components/ui/card'
 
-export default function Page() {
+export default function HomePageResumeFinancial() {
   return (
     <div className="flex bg-gray-0">
       <main className="flex-1 p-6">
