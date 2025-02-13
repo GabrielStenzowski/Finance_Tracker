@@ -14,40 +14,47 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
-
-const data = {
-  user: {
-    name: 'Gabrriel Stenzowski',
-    email: 'gabriel.stenzowskicav@gmail.com',
-  },
-
-  projects: [
-    {
-      name: 'Design Engineering',
-      url: '#',
-      icon: Frame,
-    },
-    {
-      name: 'Sales & Marketing',
-      url: '#',
-      icon: PieChart,
-    },
-    {
-      name: 'Travel',
-      url: '#',
-      icon: Map,
-    },
-  ],
-}
+import { useRouter } from 'next/navigation'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const router = useRouter()
+
+  const data = {
+    user: {
+      name: 'Gabriel Stenzowski',
+      email: 'gabriel.stenzowskicav@gmail.com',
+    },
+
+    projects: [
+      {
+        name: 'Gerenciar Categorias',
+        url: '/protected-routes/dashboard/categories',
+        icon: Frame,
+      },
+      {
+        name: 'Cadastrar Transação',
+        url: '/protected-routes/dashboard/transactions',
+        icon: PieChart,
+      },
+      {
+        name: 'Travel',
+        url: '#',
+        icon: Map,
+      },
+    ],
+  }
+
+  const handleReturnToHomePage = () => {
+    router.push('/protected-routes/home')
+  }
+
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <button onClick={handleReturnToHomePage}>
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <Command className="size-4" />
                 </div>
@@ -56,7 +63,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     Finance Tracker
                   </span>
                 </div>
-              </a>
+              </button>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
