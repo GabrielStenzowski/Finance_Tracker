@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Command, Frame, Map, PieChart } from 'lucide-react'
+import { BookOpen, Command, Frame, PieChart } from 'lucide-react'
 
 import { NavProjects } from '@/components/nav-projects'
 import { NavUser } from '@/components/nav-user'
@@ -15,6 +15,7 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
 import { useRouter } from 'next/navigation'
+import { NavMain } from './nav-main'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const router = useRouter()
@@ -32,14 +33,26 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         icon: Frame,
       },
       {
-        name: 'Cadastrar Transação',
+        name: 'Adicionar Transação',
         url: '/protected-routes/dashboard/transactions',
         icon: PieChart,
       },
+    ],
+    navMain: [
       {
-        name: 'Travel',
+        title: 'Configurações de Pagamento',
         url: '#',
-        icon: Map,
+        icon: BookOpen,
+        items: [
+          {
+            title: 'Cadastrar Conta Bancaria',
+            url: '/protected-routes/dashboard/registerBankAccout',
+          },
+          {
+            title: 'Cadastrar Cartão de Credito',
+            url: '/protected-routes/dashboard/registerCreditCard',
+          },
+        ],
       },
     ],
   }
@@ -70,6 +83,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavProjects projects={data.projects} />
+        <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
